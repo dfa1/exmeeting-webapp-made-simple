@@ -121,7 +121,9 @@
 				</section>
 				<section>
 					<section>
-						<h2>Option #1: split webapps</h2>
+						<h2>Simplify deploy</h2>
+					</section>
+					<section>
 						<p>separation of concerns</p>
 						<p>backend vs frontend</p>
 						<p>business logic vs presentation logic</p>
@@ -139,6 +141,15 @@
 							<li><strike>number rendering</strike></li>
 							<li>batch jobs</li>
 						</ul>
+						<aside class="notes">
+- server still must:
+     - verify authentication
+     - enforce security
+     - validate input data (pre-conditions) e.g. @Valid
+     - validate output data (post-conditions) e.g. unique data (404 vs 409)
+
+
+</aside>
 					</section>
 					<section>
 						<h2>Backend development</h2>
@@ -155,10 +166,10 @@
 					<section>
 						<h2>Advantages</h2>
 						<ul>
-							<li>simpler code: less or none presentation logic in the backend</li>
-							<li>don't mess with merges</li>
 							<li>independent deploy</li>
+							<li>simpler code: less or none presentation logic in the backend</li>
 							<li>server side failures can be handled better (no 5xx pages or broken links)</li>
+							<li>more threads available for real work, not just serving static files</li>
 						</ul>
 					</section>
 					<section>
@@ -175,16 +186,79 @@
 
 					<section>
 						<h2>same-origin policy</h2>
+						<p>
  publish webservice to api.example.com, use it in demo1.myapp.com
  enabled by default in all major browser (IE9+)
- see http://enable-cors.org
+<a href="http://enable-cors.org" target="_blank">enable-cors.org</a>
+</p>
 					</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Simplify scaling</h1>
+					<p>load balancing</p>
+					<p>high availability</p>
+				</section>
+				<section>
+					<p>multiple backend server</p>
+					<p>when one node goes down all users on that node must be re-login on another node</p>
+				</section>
+				<section>
+					<p>replicate the session</p>
+					<p>e.g. jvmRoute + special cookie name</p>
+					<p>it's easy and well-documented</p>
+				</section>
+				<section>
+					<h1>REST</h1>
+					<p>share-nothing architecture</p>
+				</section>
+				<section>
+					<p>no HttpSession</p>
+					<p>no Cookies</p>
+					<p>implies that every request must have authentication data</p>
+					<p>keep 'session' data on the client</p>
+				</section>
+				<section>
+					<p>restarting a node without interfere with clients</p>
+				</section>
+				<section>
+					<p>database and reverse-proxy are still a single-point of failure</p>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Simplify pagination</h1>
+				</section>
+				<section>
+ Link header introduced by RFC 5988
+				</section>
+				<section>
+					<p>first page</p>
+					<code>Link: &lt;logs?page=2&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					<p>second page</p>
+					<code>Link: &lt;logs?page=1&perPage=10>; rel="prev"</code>
+					<code>Link: &lt;logs?page=3&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					<a href="https://developer.github.com/v3/#pagination" target="_blank">github pagination</a>
+				</section>
+				<section>
+					<p><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank">pragmatic restful api</a>
+				</section>
+			</section>
+
+
 				<section>
 					<blockquote cite="">
 						<p>Simplicity is a prerequisite for reliability</p>
 						<footer>-- Edsger Dijkstra</footer>
 					</blockquote>
 				</section>
+
 				<section>
 					<h2>Pretty Code</h2>
 					<pre><code data-trim contenteditable>
@@ -205,7 +279,9 @@ function linkify( selector ) {
 					</code></pre>
 					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
-
+<section>
+- back to the past
+</section>
 				<section>
 					<h2>Intergalactic Interconnections</h2>
 					<p>
