@@ -1,17 +1,11 @@
+- review usage of server vs node vs backend
+
 - diagrams server:
    authentication
    authorization
    validation
    business logic
    persistence
-
-
-
-Caching
-"There are only two hard things in Computer Science: cache invalidation and naming things. And off-by-one errors."
-- be explicit about caching (IE9 caches everything, even AJAX responses)
-- defaults to no caching (e.g. as servlet filter or spring mvc interceptor)
-    Cache-Control:no-cache and Pragma:no-cache
 
 
 Examples with angular
@@ -23,57 +17,26 @@ Examples with angular
 - proper tab handling
     - logout from all tabs
     - requires storage window event
-- graphs (see below)
-- moment.js
-
-Graphs
-- since modern clients often are more powerful than server:
-  - server can send data with minimum processing
-  - data processing (sorting, reducing, etc) happens on the client
-  - web worker for intensive data applications (each web worker runs in a separate thread)
-- requires IE9+
-- chartjs (canvas)
-- d3.js (svg)
-- http://msdn.microsoft.com/en-us/hh552482.aspx
-- demo http://c3js.org/samples/chart_combination.html
 
 Final
 - enforces proper separation of concerns:
+- keeping on the client almost all presentation logic
   - less room for hacks on the front end: no hidden form fields, flash attributes etc
   - less room for hacks on the backend : do not put nothing in session
-- keeping on the client almost all presentation logic
-  - locale
-  - date formatting: (web services with UNIX timestamps, ISO 8610... is more work)
-    (moment.js)
-  - use UTC for dates and UTF-8 as default unicode encoding is like use base=10 in number: a sane default
-- use jshint to catch bugs as soon as possible
 
-Extras
 
 Logging
 - why?
 - MDC (Mapped Contextual Contexts)
 - example
 
-ETags
-- optimistic locking (http://en.wikipedia.org/wiki/Optimistic_concurrency_control)
-- Hibernate optimistic locking (@Version): works for dates and integers
-- http://martinfowler.com/eaaCatalog/optimisticOfflineLock.html
-- with Date
 
 Result set Streaming
 - remove temporary allocation of big list in memory
 - short-circuit resultset iteration with output
 - usability: give user immediate feedback
 
-Apache httpd
-- can serve static content (enable sendfile support)
-- can act as load balancer for backend services
-- can gzip content
-- can enable CORS
-- can terminate HTTPS connections
-- beware: by default connection keepalive is disable in centos5/6
-- beware: by default there is one-process per client
+
 
 Oracle JDBC cursors
 - fetch multiple resultset with one database roundtrip
@@ -85,8 +48,7 @@ Javascript
 - strong unit testing practices
 - on IE9+ we can use ES5
 - 'use strict' (not available IE9)
-
-
+- use jshint to catch bugs as soon as possible
 
 Slides as gulp project
 - use http://bramp.github.io/js-sequence-diagrams/

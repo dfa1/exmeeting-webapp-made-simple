@@ -49,43 +49,44 @@
 				<section>
 					<h1>Disclaimer</h1>
 					<ul>
-						<li>First talk about
-						<li>My point of view is about <strong>reliability</strong> and <strong>horintal scaling</strong></li>
+						<li>My first talk about this stuff</li>
+						<li>Lucky to write an webapp from scratch...</li>
 						<li>No silver bullets™</li>
 					</ul>
 					<aside class="notes">
+						My notes... remember to hit 's'
 					</aside>
 				</section>
 				<section>
 					<section>
-						<h2>MVC Architecture</h2>
+						<h2>MVC Webapp Architecture</h2>
 						<ul>
 							<li>client request a view</li>
 							<li>client invokes an action (change view, submit form)</li>
-							<li>server process the request in a controller</li>
-							<li>the request is satisfied</li>
+							<li>server process the request</li>
 							<li>server sends a new view to the client</li>
 						</ul>
 					</section>
 					<section>
 						<h2>Server role</h2>
 						<ul>
-							<li>session affinity (via cookies)</li>
 							<li>authentication&amp;authorization</li>
+							<li>session affinity (via cookies)</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>HTML rendering (JSP, freemarker, velocity, whatever)</li>
-							<li>date rendering</li>
-							<li>number rendering</li>
+							<li>HTML generation (including dates, timezones, numbers, etc)</li>
 							<li>batch jobs</li>
 						</ul>
+					<aside class="notes">
+HTML generation using JSP, velocity, freemarker, JSF, whatever..
+					</aside>
 					</section>
 					<section>
 						<h2>Client role</h2>
 						<ul>
 							<li>render HTML page</li>
 							<li>send relevant cookies</li>
-							<li>optionally validation</li>
+							<li>optionally validate data before send to the server</li>
 						</ul>
 					</section>
 					<section>
@@ -94,7 +95,11 @@
 							<li>one .war per webapp</li>
 							<li>one .war per servlet container</li>
 							<li>one JVM per servlet container</li>
+							<li>reverse proxy in front of the servlet container</li>
 						</ul>
+					<aside class="notes">
+					reverse proxy to terminate HTTPS connections, load balancing, etc	
+					</aside>
 					</section>
 					<section>
 						<p>Perfectly reasonable architectures but...</p>
@@ -102,7 +107,7 @@
 					<section>
 						<h2>What happens when...</h2>
 						<ul>
-							<li>a CSS attribute must be changed (e.g. because on IE the view is broken)</li>
+							<li>a CSS attribute must be changed</li>
 							<li>fix on a JS feature unavailable on iOS</li>
 							<li>internal server error</li>
 							<li>upgrade container (security fix)</li>
@@ -114,8 +119,8 @@
 						<h2>Problems</h2>
 						<ul>
 							<li>logger users must relogin after each deploy</li>
-							<li>stop adoption of continuous delivery</li>
 							<li>frontends and backend developers working on same artifact</li>
+							<li>stop adoption of continuous delivery</li>
 						</ul>
 					</section>
 				</section>
@@ -126,7 +131,6 @@
 					<section>
 						<p>separation of concerns</p>
 						<p>backend vs frontend</p>
-						<p>business logic vs presentation logic</p>
 					</section>
 					<section>
 						<h2>Backend</h2>
@@ -136,9 +140,7 @@
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li><strike>HTML rendering (JSP, freemarker, velocity, whatever)</strike></li>
-							<li><strike>date rendering</strike></li>
-							<li><strike>number rendering</strike></li>
+							<li><strike>HTML generation</strike></li>
 							<li>batch jobs</li>
 						</ul>
 						<aside class="notes">
@@ -147,13 +149,12 @@
      - enforce security
      - validate input data (pre-conditions) e.g. @Valid
      - validate output data (post-conditions) e.g. unique data (404 vs 409)
-
-
 </aside>
 					</section>
 					<section>
 						<h2>Backend development</h2>
-						<p>can be developed using maven</p>
+						<p>can be a mvc application view JSON as only view</p>
+						<p>can be developed using maven, gradle, lein, etc</p>
 						<p>optimal setup for backend developers</p>
 					</section>
 					<section>
@@ -167,7 +168,7 @@
 						<h2>Advantages</h2>
 						<ul>
 							<li>independent deploy</li>
-							<li>simpler code: less or none presentation logic in the backend</li>
+							<li>simpler code: minimal presentation logic in the backend</li>
 							<li>server side failures can be handled better (no 5xx pages or broken links)</li>
 							<li>more threads available for real work, not just serving static files</li>
 						</ul>
@@ -175,22 +176,20 @@
 					<section>
 						<h2>Frontend as a static directory</h2>
 						<p>can be deployed on any http server without service interruption (e.g. linux atomic ops on symlinks)</p>
-						<p>can be served as gzip (Content-Encoding:gzip)</p>
-						<p>can be served using sendfilei syscall (direct streaming file->socket)</p>
+						<p>can be served as gzip (for optimal bandwidth usage)</p>
+						<p>can be served using sendfile(2) syscall (direct streaming file->socket)</p>
 					</section>
 					<section>
 						<h2>One backend, Multiple frontend</h2>
-						<p>simplifies development: frontend developer can use remote backend</p>
 						<p>customer can see new UI stuff quickly</p>
+						<p>can simplify development: frontend developers can use one remote backend</p>
 					</section>
-
 					<section>
 						<h2>same-origin policy</h2>
-						<p>
- publish webservice to api.example.com, use it in demo1.myapp.com
- enabled by default in all major browser (IE9+)
-<a href="http://enable-cors.org" target="_blank">enable-cors.org</a>
-</p>
+						<p>publish webservice to <a href>api.example.com</a></p>
+						<p>use it in <a href>staging.exmachina.ch</a></p>
+						<p>use it in <a href>demo.exmachina.ch</a></p>
+						<p>see <a href="http://enable-cors.org" target="_blank">enable-cors.org</a></p>
 					</section>
 			</section>
 
@@ -206,24 +205,149 @@
 				</section>
 				<section>
 					<p>replicate the session</p>
-					<p>e.g. jvmRoute + special cookie name</p>
+					<p>on tomcat set a jvmRoute + configure reverse proxy</p>
 					<p>it's easy and well-documented</p>
 				</section>
 				<section>
 					<h1>REST</h1>
-					<p>share-nothing architecture</p>
 				</section>
 				<section>
+					<p>share-nothing architecture</p>
 					<p>no HttpSession</p>
 					<p>no Cookies</p>
 					<p>implies that every request must have authentication data</p>
-					<p>keep 'session' data on the client</p>
+					<p>localStorage</p>
+					<p>sessionStorage</p>
 				</section>
 				<section>
 					<p>restarting a node without interfere with clients</p>
 				</section>
 				<section>
+					keep in the client the session<br>
+					keep in the frontend all the presentation logic<br>
+				</section>
+				<section>
+					<h3>Apache httpd</h3>
+					<ul>
+<li>HTTPS connections</li>
+<li>static content (sendfile)</li>
+<li>reverse proxy</li>
+<li>load balancer</li>
+<li>gzip content</li>
+<li>CORS</li>
+</ul>
+				</section>
+				<section>
 					<p>database and reverse-proxy are still a single-point of failure</p>
+
+				</section>
+			</section>
+
+			
+			<section>
+				<section>
+					<h1>Simplify Charting</h1>
+				</section>
+				<section>
+					charts in flash or built server side as images
+				</section>
+				<section>
+					the more work that is carried out by client,<br>
+					the less the server needs to do<br>
+				</section>
+				<section>
+					<h3>costs</h3>
+					server time = $$$ (for your company)<br>
+					client time = free (for your company)<br>
+				</section>
+				<section>
+					<h1>javascript</h1>
+				</section>
+				<section>
+					fetch data from server as JSON<br>
+					data processing in the browser<br>
+					one fetch = multiple charts 
+					<aside class="notes">
+  					data processing (sorting, reducing, etc) happens on the client
+					</aside>
+				</section>
+				<section>
+  					web worker for intensive data applications<br>
+					runs in a separate, background thread<br>
+				</section>
+				<section>
+					<a href="http://www.chartjs.org" target="_blank">Chart.js</a><br>
+					(HTML5 canvas, requires IE9+)<br>
+					* <strong>beware</strong>: id is used also as a label
+				</section>
+				<section>
+					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
+					(SVG CSS JS, requires IE9+)<br>
+				</section>
+				<section>
+					<a href="http://c3js.org/samples/chart_combination.html" target="_blank">C3.js</a><br>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Simplify Caching</h1>
+<blockquote>There are only <strong>two</strong> hard things in Computer Science: 
+<p>cache invalidation</p>
+<p>naming things</p> 
+<p>off-by-one errors</p>
+</blockquote>
+
+				</section>
+				<section>
+					Be explicit about caching <br>(IE9 caches everything, even AJAX responses)
+				</section>
+				<section>
+ 					defaults to no caching <br>
+				(using servlet filter or spring mvc interceptor)<br>
+					<code>Cache-Control: no-cache</code> <br>
+					<code>Pragma: no-cache</code><br>
+				</section>
+				<section>
+					then add cache headers only when proven useful
+				</section>
+				<section>
+				cache invalidation can be hard
+				</section>
+				<section>
+					ETAG
+				</section>
+				<section>
+					ETAG enables <a href="http://martinfowler.com/eaaCatalog/optimisticOfflineLock.html" target="_blank">optimistic locking</a>
+				</section>
+				<section>
+					see also <code>@Version</code> annotation of JPA/Hibernate
+				</section>
+			</section>
+
+
+			<section>
+				<section>
+					<h1>Simplify timestamps</h1>
+				</section>
+				<section>
+					web service provides dates as UNIX timestamps<br>
+					<code>{ "last_update": 1422300695732 }</code> 
+				</section>
+				<section>
+					<code>new Date(1422300695732); </code><br>
+					<code>"Mon Jan 26 2015 20:31:35 GMT+0100"</code><br>
+				</section>
+				<section>
+					automatically uses the timezone of the user
+				</section>
+				<section>
+					alternatively many web services uses ISO-8601<br>
+<code>2015-01-26T16:14:49+00:00</code>
+				</section>
+				<section>
+				<a href="http://momentjs.com" target="_blank">moment.js</a><br>
+				jodatime:java = momentjs:javascript
 				</section>
 			</section>
 
@@ -240,7 +364,7 @@
 				</section>
 				<section>
 					<p>second page</p>
-					<code>Link: &lt;logs?page=1&perPage=10>; rel="prev"</code>
+					<code>Link: &lt;logs?page=1&perPage=10>; rel="prev"</code><br>
 					<code>Link: &lt;logs?page=3&perPage=10>; rel="next"</code>
 				</section>
 				<section>
