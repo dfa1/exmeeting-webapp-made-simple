@@ -1,12 +1,9 @@
-- review usage of server vs node vs backend
-
 - diagrams server:
    authentication
    authorization
    validation
    business logic
    persistence
-
 
 Examples with angular
 - wizards
@@ -17,12 +14,10 @@ Final
   - less room for hacks on the front end: no hidden form fields, flash attributes etc
   - less room for hacks on the backend : do not put nothing in session
 
-
 Logging
 - why?
 - MDC (Mapped Contextual Contexts)
 - example
-
 
 Result set Streaming
 - remove temporary allocation of big list in memory
@@ -41,5 +36,3 @@ Javascript
 - 'use strict' (not available IE9)
 - use jshint to catch bugs as soon as possible
 
-Slides as gulp project
-- use http://bramp.github.io/js-sequence-diagrams/

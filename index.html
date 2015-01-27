@@ -53,18 +53,37 @@
 						- new backend webapp from scratch
 					</aside>
 				</section>
+
+				<section>
+					<section>
+						<h2>$$$ dollars<h2>
+					</section>
+					<section>
+						server resources are limited<br>
+						server hosting is not cheap<br>
+					</section>
+					<section>
+						the more work that is carried out by client,<br>
+						the less the server needs to do<br>
+					</section>
+					<section>
+						let's move computation to the client
+					</section>
+				</section>
+
 				<section>
 					<section>
 						<h2>MVC Webapp Architecture</h2>
 						<ul>
-							<li>client request a view</li>
+							<li>client requests a view</li>
 							<li>client invokes an action (change view, submit form)</li>
-							<li>server process the request</li>
+							<li>server handles the request</li>
 							<li>server sends a new view to the client</li>
+							<li>authentication is handled via cookies</li>
 						</ul>
 					</section>
 					<section>
-						<h3>Server role</h3>
+						<h3>Server</h3>
 						<ul>
 							<li>authentication&amp;authorization</li>
 							<li>session affinity (via cookies)</li>
@@ -78,10 +97,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</aside>
 					</section>
 					<section>
-						<h3>Client role</h3>
+						<h3>Client</h3>
 						<ul>
-							<li>render HTML page</li>
-							<li>send relevant cookies</li>
+							<li>render HTML page on screen</li>
+							<li>send relevant cookies for auth</li>
 							<li>optionally validate data before send to the server</li>
 						</ul>
 					</section>
@@ -89,7 +108,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<h3>Deployment model</h3>
 						<ul>
 							<li>one .war per webapp</li>
-							<li>one .war per servlet container</li>
+							<li>one or more .war per servlet container</li>
 							<li>one JVM per servlet container</li>
 							<li>expose servlet container via reverse-proxy</li>
 						</ul>
@@ -103,9 +122,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<section>
 						<h3>What happens when...</h3>
 						<ul>
-							<li>a CSS attribute must be changed</li>
-							<li>fix on a JS feature unavailable on iOS</li>
-							<li>internal server error</li>
+							<li>a CSS has been changed</li>
+							<li>a JS has been changed</li>
+							<li>a Java class has been changed</li>
 							<li>upgrade container (security fix)</li>
 							<li>JVM error (out of memory)</li>
 							<li>server must be rebooted (kernel update)</li>
@@ -114,7 +133,8 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<section>
 						<h3>Problems</h3>
 						<ul>
-							<li>logged users must relogin after each deploy</li>
+							<li>server does too many things</li>
+							<li>logged users must relogin after deploy</li>
 							<li>frontends and backend developers working on same artifact</li>
 							<li>blocks adoption of continuous delivery</li>
 						</ul>
@@ -126,26 +146,34 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</section>
 					<section>
 						<p>separation of concerns</p>
-						<p>backend vs frontend</p>
+						<p>webapp = backend + frontend</p>
 					</section>
 					<section>
 						<h3>Backend</h3>
 						<ul>
-							<li>session affinity (via cookies)</li>
-							<li>authentication&amp;authorization</li>
+							<li>authentication</li>
+							<li>authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li><strike>HTML generation</strike></li>
 							<li>batch jobs</li>
+							<li><strike>HTML generation</strike></li>
+							<li><strike>serving other static resources (CSS, JS)</strike></li>
 						</ul>
 					</section>
 					<section>
-						<p>can be a mvc application view JSON as only view</p>
+						<p>consumer agnostic</p>
+						<p>can be the a java webapp (spring-mvc, resteasy, jersey, etc)</p>
 						<p>can be developed using maven, gradle, lein, etc</p>
 					</section>
 					<section>
 						<h3>Frontend</h3>
-						<p>can be a single page application</p>
+						<ul>
+							<li>HTML generation</li>
+							<li>serving other static resources (CSS, JS)</li>
+						</ul>
+					</section>
+					<section>
+						<p>can be a single page application (angularjs, backbone + reactjs, etc)</p>
 						<p>can be developed using maven + <a href="http://webjars.org" target="_blank">webjars</a></p>
 					</section>
 					<section>
@@ -156,10 +184,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<section>
 						<h3>Advantages</h3>
 						<ul>
-							<li>independent deploy</li>
 							<li>simpler code: minimal presentation logic in the backend</li>
-							<li>more threads available for real work, not just serving static files</li>
-							<li>server side failures could be handled better (no 5xx pages or broken links)</li>
+							<li>independent deploy</li>
+							<li>more threads available for real work (not serving static files)</li>
+							<li>backend failures can be handled better</li>
 						</ul>
 					</section>
 					<section>
@@ -170,10 +198,14 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<p>see <a href="http://enable-cors.org" target="_blank">enable-cors.org</a></p>
 					</section>
 					<section>
+						Backend deploy is unchanged (servlet container)
+					</section>
+					<section>
 						<h3>Frontend as a static directory</h3>
-						<p>can be deployed on any http server without service interruption (e.g. linux atomic ops on symlinks)</p>
+						<p>can be deployed in any http server without service interruption</p>
+						<p>(e.g. linux atomic ops on symlinks)</p>
 						<p>can be served as gzip (for optimal bandwidth usage)</p>
-						<p>can be served using sendfile(2) syscall (direct streaming file->socket)</p>
+						<p>can be served using sendfile(2) syscall (direct streaming file-&gt;socket)</p>
 					</section>
 					<section>
 						<h3>One backend, multiple frontends</h3>
@@ -189,8 +221,8 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<p>high availability</p>
 				</section>
 				<section>
-					<p>multiple backend server</p>
-					<p>when one node goes down all users on that node must be re-login on another node</p>
+					<p>multiple backend instances</p>
+					<p>when one backend instance goes down all users on that node must be re-login</p>
 				</section>
 				<section>
 					<p>replicate the session</p>
@@ -198,178 +230,26 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<p>it's easy and well-documented</p>
 				</section>
 				<section>
+					but we can dogde this problem entirely...
+				</section>
+				<section>
 					<h1>REST</h1>
 				</section>
 				<section>
-					<p>share-nothing architecture</p>
-					<p>no HttpSession</p>
-					<p>no Cookies</p>
-					<p>implies that every request must have authentication data</p>
-					<p>localStorage</p>
-					<p>sessionStorage</p>
+					share-nothing architecture<br>
+					no HttpSession<br>
+					no Cookies</p>
 				</section>
 				<section>
-					<p>restarting a node without interfere with clients</p>
+					implies that every request must <strong>carry on authentication</strong>
+				</section>
+				<section>
+					restarting a node without interfere with clients
 				</section>
 				<section>
 					keep in the client the session<br>
 					keep in the frontend all the presentation logic<br>
 				</section>
-				<section>
-					<h3>Apache httpd</h3>
-					<ul>
-						<li>HTTPS connections</li>
-						<li>static content (sendfile)</li>
-						<li>reverse proxy</li>
-						<li>load balancer</li>
-						<li>gzip content</li>
-						<li>CORS</li>
-					</ul>
-					</section>
-				<section>
-					<p>database and reverse-proxy are still a single-point of failure</p>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h2>Simplify Charting</h2>
-				</section>
-				<section>
-					charts in flash or built server side as images
-				</section>
-				<section>
-					the more work that is carried out by client,<br>
-					the less the server needs to do<br>
-				</section>
-				<section>
-					<h3>costs</h3>
-					server time = $$$ (for your company)<br>
-					client time = free (for your company)<br>
-				</section>
-				<section>
-					<h1>javascript</h1>
-				</section>
-				<section>
-					fetch data from server as JSON<br>
-					data processing in the browser<br>
-					one fetch = multiple charts
-					<aside class="notes">
-  					data processing (sorting, reducing, etc) happens on the client
-					</aside>
-				</section>
-				<section>
-  					web worker for intensive data applications<br>
-					runs in a separate, background thread<br>
-				</section>
-				<section>
-					<a href="http://www.chartjs.org" target="_blank">Chart.js</a><br>
-					(HTML5 canvas, requires IE9+)<br>
-					* <strong>beware</strong>: id is used also as a label
-				</section>
-				<section>
-					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
-					(SVG CSS JS, requires IE9+)<br>
-				</section>
-				<section>
-					<a href="http://c3js.org/samples/chart_combination.html" target="_blank">C3.js</a><br>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h2>Simplify Caching</h2>
-					<blockquote>
-						<small>There are only two hard things in Computer Science:<br>
-						cache invalidation<br>
-						naming things<br>
-						off-by-one errors<br>
-						</small>
-					</blockquote>
-				</section>
-				<section>
-					Be explicit about caching <br>(IE9 caches everything, even AJAX responses)
-				</section>
-				<section>
- 					defaults to no caching <br>
-				(using servlet filter or spring mvc interceptor)<br>
-					<code>Cache-Control: no-cache</code> <br>
-					<code>Pragma: no-cache</code><br>
-				</section>
-				<section>
-					then add cache headers only when proven useful
-				</section>
-				<section>
-				cache invalidation can be hard
-				</section>
-				<section>
-					<h1>ETAG</h1>
-				</section>
-				<section>
-					ETAG could be used for <a href="http://martinfowler.com/eaaCatalog/optimisticOfflineLock.html" target="_blank">optimistic locking</a>
-				</section>
-				<section>
-					see also <code>@Version</code> annotation of JPA/Hibernate
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h2>Simplify timestamps</h2>
-				</section>
-				<section>
-					web service provides dates as UNIX timestamps<br>
-					<code>{ "last_update": 1422300695732 }</code>
-				</section>
-				<section>
-					<code>new Date(1422300695732);</code><br>
-					<code>"Mon Jan 26 2015 20:31:35 GMT+0100"</code><br>
-				</section>
-				<section>
-					automatically uses the timezone of the user
-				</section>
-				<section>
-					alternatively many web services uses ISO-8601<br>
-					<code>2015-01-26T16:14:49+00:00</code>
-				</section>
-				<section>
-					<a href="http://momentjs.com" target="_blank">moment.js</a><br>
-					jodatime:java = momentjs:javascript
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h2>Simplify pagination</h2>
-				</section>
-				<section>
-					Link header introduced by RFC 5988
-				</section>
-				<section>
-					<p>first page</p>
-					<code>Link: &lt;logs?page=2&perPage=10>; rel="next"</code>
-				</section>
-				<section>
-					<p>second page</p>
-					<code>Link: &lt;logs?page=1&perPage=10>; rel="prev"</code><br>
-					<code>Link: &lt;logs?page=3&perPage=10>; rel="next"</code>
-				</section>
-				<section>
-					<a href="https://developer.github.com/v3/#pagination" target="_blank">github pagination</a>
-				</section>
-				<section>
-					<p><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank">pragmatic restful api</a>
-				</section>
-			</section>
-
-			<section>
-				<blockquote cite="">
-						<p>Simplicity is a prerequisite for reliability</p>
-						<footer>-- Edsger Dijkstra</footer>
-				</blockquote>
-			</section>
-
-			<section>
 				<section>
 					<h2>Angular examples</h2>
 					using a restful web service<br>
@@ -469,10 +349,154 @@ app.run(function($window, $state, $log) {
 });
 					</code></pre>
 				</section>
+
+				<section>
+					<h3>Apache httpd</h3>
+					<ul>
+						<li>HTTPS connections</li>
+						<li>reverse proxy</li>
+						<li>gzip content</li>
+						<li>CORS</li>
+						<li>serve static files (sendfile is supported)</li>
+					</ul>
+					</section>
+				<section>
+					<p>database and reverse-proxy are still a single-point of failure</p>
+				</section>
 			</section>
 
 			<section>
-			back to the past?
+				<section>
+					<h2>Simplify Charting</h2>
+				</section>
+				<section>
+					charts in flash<br>
+					charts as server generated images
+				</section>
+				<section>
+					<h1>javascript</h1>
+				</section>
+				<section>
+					fetch data from backend as JSON<br>
+					data processing in the frontend<br>
+					one fetch = multiple charts
+					<aside class="notes">
+  					data processing (sorting, reducing, etc) happens on the client
+					</aside>
+				</section>
+				<section>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/basic_usage" target="_blank">web workers</a> for intensive data applications<br>
+					runs in a separate, background thread<br>
+				</section>
+				<section>
+					<a href="http://www.chartjs.org" target="_blank">Chart.js</a><br>
+					(HTML5 canvas, requires IE9+)<br>
+					* <strong>beware</strong>: id is used also as a label
+				</section>
+				<section>
+					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
+					(SVG CSS JS, requires IE9+)<br>
+				</section>
+				<section>
+					<a href="http://c3js.org/samples/chart_combination.html" target="_blank">C3.js</a><br>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Simplify Caching</h2>
+					<blockquote>
+						<small>There are only two hard things in Computer Science:<br>
+						cache invalidation<br>
+						naming things<br>
+						off-by-one errors<br>
+						</small>
+					</blockquote>
+				</section>
+				<section>
+					Be explicit about caching <br>(IE9 caches everything, even AJAX responses)
+				</section>
+				<section>
+ 					defaults to no caching <br>
+				(using servlet filter or spring mvc interceptor)<br>
+					<code>Cache-Control: no-cache</code> <br>
+					<code>Pragma: no-cache</code><br>
+				</section>
+				<section>
+					then add cache headers only when proven useful
+				</section>
+				<section>
+					cache invalidation is hard
+				</section>
+				<section>
+					<h1>ETAG</h1>
+				</section>
+				<section>
+					ETAG could be used for <a href="http://martinfowler.com/eaaCatalog/optimisticOfflineLock.html" target="_blank">optimistic locking</a>
+				</section>
+				<section>
+					see also <code>@Version</code> annotation of JPA/Hibernate
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Simplify timestamps</h2>
+				</section>
+				<section>
+					web service provides dates as UNIX timestamps<br>
+					<code>{ "last_update": 1422300695732 }</code>
+				</section>
+				<section>
+					<code>new Date(1422300695732);</code><br>
+					<code>"Mon Jan 26 2015 20:31:35 GMT+0100"</code><br>
+				</section>
+				<section>
+					automatically uses the timezone of the user
+				</section>
+				<section>
+					alternatively many web services uses ISO-8601<br>
+					<code>2015-01-26T16:14:49+00:00</code>
+				</section>
+				<section>
+					<a href="http://momentjs.com" target="_blank">moment.js</a><br>
+					jodatime:java = momentjs:javascript
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Simplify pagination</h2>
+				</section>
+				<section>
+					Link header introduced by RFC 5988
+				</section>
+				<section>
+					<p>first page</p>
+					<code>Link: &lt;logs?page=2&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					<p>second page</p>
+					<code>Link: &lt;logs?page=1&perPage=10>; rel="prev"</code><br>
+					<code>Link: &lt;logs?page=3&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					<a href="https://developer.github.com/v3/#pagination" target="_blank">github pagination</a>
+				</section>
+				<section>
+					<p><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank">pragmatic restful api</a>
+				</section>
+			</section>
+
+			<section>
+				<blockquote cite="">
+						<p>Simplicity is a prerequisite for reliability</p>
+						<footer>-- Edsger Dijkstra</footer>
+				</blockquote>
+			</section>
+
+			<section>
+				back to the past?
 			</section>
 
 	   </div>
