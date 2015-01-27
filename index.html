@@ -42,12 +42,9 @@
 			<div class="slides">
 				<section>
 					<h1>Webapp made simple(r)</h1>
-					<p>
-						<small>Created by Davide Angelocola <a href="http://twitter.com/the_dfa">@the_dfa</a></small>
-					</p>
 				</section>
 				<section>
-					<h1>Disclaimer</h1>
+					<h2>Disclaimer</h2>
 					<ul>
 						<li>My first talk about this stuff</li>
 						<li>Lucky to write an webapp from scratch...</li>
@@ -97,9 +94,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>one JVM per servlet container</li>
 							<li>reverse proxy in front of the servlet container</li>
 						</ul>
-					<aside class="notes">
-					reverse proxy to terminate HTTPS connections, load balancing, etc	
-					</aside>
+						<aside class="notes">
+							reverse proxy to terminate HTTPS connections, load balancing, etc
+						</aside>
 					</section>
 					<section>
 						<p>Perfectly reasonable architectures but...</p>
@@ -144,12 +141,12 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>batch jobs</li>
 						</ul>
 						<aside class="notes">
-- server still must:
-     - verify authentication
-     - enforce security
-     - validate input data (pre-conditions) e.g. @Valid
-     - validate output data (post-conditions) e.g. unique data (404 vs 409)
-</aside>
+							server still must:
+     						- verify authentication
+							- enforce security
+							- validate input data (pre-conditions) e.g. @Valid
+     						- validate output data (post-conditions) e.g. unique data (404 vs 409)
+						</aside>
 					</section>
 					<section>
 						<h2>Backend development</h2>
@@ -180,7 +177,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<p>can be served using sendfile(2) syscall (direct streaming file->socket)</p>
 					</section>
 					<section>
-						<h2>One backend, Multiple frontend</h2>
+						<h2>One backend, multiple frontends</h2>
 						<p>customer can see new UI stuff quickly</p>
 						<p>can simplify development: frontend developers can use one remote backend</p>
 					</section>
@@ -195,7 +192,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 
 			<section>
 				<section>
-					<h1>Simplify scaling</h1>
+					<h2>Simplify scaling</h2>
 					<p>load balancing</p>
 					<p>high availability</p>
 				</section>
@@ -227,26 +224,24 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					keep in the frontend all the presentation logic<br>
 				</section>
 				<section>
-					<h3>Apache httpd</h3>
+					<h2>Apache httpd</h2>
 					<ul>
-<li>HTTPS connections</li>
-<li>static content (sendfile)</li>
-<li>reverse proxy</li>
-<li>load balancer</li>
-<li>gzip content</li>
-<li>CORS</li>
-</ul>
-				</section>
+						<li>HTTPS connections</li>
+						<li>static content (sendfile)</li>
+						<li>reverse proxy</li>
+						<li>load balancer</li>
+						<li>gzip content</li>
+						<li>CORS</li>
+					</ul>
+					</section>
 				<section>
 					<p>database and reverse-proxy are still a single-point of failure</p>
-
 				</section>
 			</section>
 
-			
 			<section>
 				<section>
-					<h1>Simplify Charting</h1>
+					<h2>Simplify Charting</h2>
 				</section>
 				<section>
 					charts in flash or built server side as images
@@ -266,7 +261,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					fetch data from server as JSON<br>
 					data processing in the browser<br>
-					one fetch = multiple charts 
+					one fetch = multiple charts
 					<aside class="notes">
   					data processing (sorting, reducing, etc) happens on the client
 					</aside>
@@ -291,13 +286,14 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 
 			<section>
 				<section>
-					<h1>Simplify Caching</h1>
-<blockquote>There are only <strong>two</strong> hard things in Computer Science: 
-<p>cache invalidation</p>
-<p>naming things</p> 
-<p>off-by-one errors</p>
-</blockquote>
-
+					<h2>Simplify Caching</h2>
+					<blockquote>
+						<small>There are only two hard things in Computer Science:<br>
+						cache invalidation<br>
+						naming things<br>
+						off-by-one errors<br>
+						</small>
+					</blockquote>
 				</section>
 				<section>
 					Be explicit about caching <br>(IE9 caches everything, even AJAX responses)
@@ -325,14 +321,13 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 			</section>
 
-
 			<section>
 				<section>
-					<h1>Simplify timestamps</h1>
+					<h2>Simplify timestamps</h2>
 				</section>
 				<section>
 					web service provides dates as UNIX timestamps<br>
-					<code>{ "last_update": 1422300695732 }</code> 
+					<code>{ "last_update": 1422300695732 }</code>
 				</section>
 				<section>
 					<code>new Date(1422300695732); </code><br>
@@ -343,20 +338,20 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					alternatively many web services uses ISO-8601<br>
-<code>2015-01-26T16:14:49+00:00</code>
+					<code>2015-01-26T16:14:49+00:00</code>
 				</section>
 				<section>
-				<a href="http://momentjs.com" target="_blank">moment.js</a><br>
-				jodatime:java = momentjs:javascript
+					<a href="http://momentjs.com" target="_blank">moment.js</a><br>
+					jodatime:java = momentjs:javascript
 				</section>
 			</section>
 
 			<section>
 				<section>
-					<h1>Simplify pagination</h1>
+					<h2>Simplify pagination</h2>
 				</section>
 				<section>
- Link header introduced by RFC 5988
+					Link header introduced by RFC 5988
 				</section>
 				<section>
 					<p>first page</p>
@@ -375,9 +370,8 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 			</section>
 
-
-				<section>
-					<blockquote cite="">
+			<section>
+				<blockquote cite="">
 						<p>Simplicity is a prerequisite for reliability</p>
 						<footer>-- Edsger Dijkstra</footer>
 					</blockquote>
