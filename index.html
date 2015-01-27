@@ -50,24 +50,24 @@
 						<li>No silver bullets™</li>
 					</ul>
 					<aside class="notes">
-						- new backend webapp from scratch
+						new backend webapp from scratch
 					</aside>
 				</section>
 
 				<section>
 					<section>
-						<h2>$$$ dollars<h2>
+						<h2>$$$<h2>
 					</section>
 					<section>
 						server resources are limited<br>
-						server hosting is not cheap<br>
+						server hosting is not free...<br>
 					</section>
 					<section>
 						the more work that is carried out by client,<br>
 						the less the server needs to do<br>
 					</section>
 					<section>
-						let's move computation to the client
+						let's move computation in the client
 					</section>
 				</section>
 
@@ -140,6 +140,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						</ul>
 					</section>
 				</section>
+
 				<section>
 					<section>
 						<h2>Simplify deploy</h2>
@@ -217,20 +218,17 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 			<section>
 				<section>
 					<h2>Simplify scaling</h2>
-					<p>load balancing</p>
-					<p>high availability</p>
+					load balancing<br>
+					high availability<br>
 				</section>
 				<section>
-					<p>multiple backend instances</p>
-					<p>when one backend instance goes down all users on that node must be re-login</p>
+					multiple backend instance<br>
+					when one backend instance goes down all users on that node must be re-login<br>
 				</section>
 				<section>
-					<p>replicate the session</p>
-					<p>on tomcat set a jvmRoute + configure reverse proxy</p>
-					<p>it's easy and well-documented</p>
-				</section>
-				<section>
-					but we can dogde this problem entirely...
+					replicate the session ()<br>
+					on tomcat set a jvmRoute + configure reverse proxy<br>
+					it's easy and well-documented<br>
 				</section>
 				<section>
 					<h1>REST</h1>
@@ -238,17 +236,13 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					share-nothing architecture<br>
 					no HttpSession<br>
-					no Cookies</p>
+					no Cookies<br>
 				</section>
 				<section>
 					implies that every request must <strong>carry on authentication</strong>
 				</section>
 				<section>
 					restarting a node without interfere with clients
-				</section>
-				<section>
-					keep in the client the session<br>
-					keep in the frontend all the presentation logic<br>
 				</section>
 				<section>
 					<h2>Angular examples</h2>
@@ -349,7 +343,6 @@ app.run(function($window, $state, $log) {
 });
 					</code></pre>
 				</section>
-
 				<section>
 					<h3>Apache httpd</h3>
 					<ul>
