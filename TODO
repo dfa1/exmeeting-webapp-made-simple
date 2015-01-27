@@ -9,14 +9,7 @@
 
 
 Examples with angular
-- login
-- keep client side session
-  - examples with angular 1.2/1.3 interceptor
-- session timeout for inactivity
 - wizards
-- proper tab handling
-    - logout from all tabs
-    - requires storage window event
 
 Final
 - enforces proper separation of concerns:
@@ -35,8 +28,6 @@ Result set Streaming
 - remove temporary allocation of big list in memory
 - short-circuit resultset iteration with output
 - usability: give user immediate feedback
-
-
 
 Oracle JDBC cursors
 - fetch multiple resultset with one database roundtrip
