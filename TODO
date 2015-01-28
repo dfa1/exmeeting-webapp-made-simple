@@ -1,3 +1,6 @@
+- http://dc-js.github.io/dc.js/
+- local storage sync
+
 - diagrams server:
    authentication
    authorization
