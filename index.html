@@ -46,11 +46,10 @@
 				<section>
 					<h2>Disclaimer</h2>
 					<ul>
-						<li>My first talk about this stuff</li>
 						<li>No silver bullets™</li>
 					</ul>
 					<aside class="notes">
-						new backend webapp from scratch
+						A starting point... not a
 					</aside>
 				</section>
 
@@ -58,31 +57,31 @@
 					<section>
 						<h2>MVC Webapp Architecture</h2>
 						<ul>
-							<li>client invokes an action (change view, submit form)</li>
-							<li>server handles the request</li>
-							<li>server sends a new view to the client</li>
+							<li>browser invokes an action (change view, submit form)</li>
+							<li>webapp handles the request</li>
+							<li>webapp sends a new view to the browser</li>
 						</ul>
 					</section>
 					<section>
-						<h3>Server</h3>
+						<h3>Webapp</h3>
 						<ul>
 							<li>authentication&amp;authorization</li>
 							<li>session affinity (via cookies)</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>batch jobs</li>
+							<li>persistence</li>
 							<li>HTML generation (including dates, timezones, numbers, etc)</li>
+							<li>static files (JS, CSS, images, etc)
 						</ul>
 					<aside class="notes">
 HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</aside>
 					</section>
 					<section>
-						<h3>Client</h3>
+						<h3>Browser</h3>
 						<ul>
 							<li>render HTML page on screen</li>
 							<li>send relevant cookies for auth</li>
-							<li>optionally validate data before send to the server</li>
 						</ul>
 					</section>
 					<section>
@@ -91,14 +90,11 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>one .war per webapp</li>
 							<li>one or more .war per servlet container</li>
 							<li>one JVM per servlet container</li>
-							<li>expose servlet container via reverse-proxy</li>
+							<li>* expose servlet container via reverse-proxy</li>
 						</ul>
 						<aside class="notes">
 							reverse proxy to terminate HTTPS connections, load balancing, etc
 						</aside>
-					</section>
-					<section>
-						<p>Perfectly reasonable architectures but...</p>
 					</section>
 					<section>
 						<h3>What happens when...</h3>
@@ -106,19 +102,12 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>a CSS has been changed</li>
 							<li>a JS has been changed</li>
 							<li>a Java class has been changed</li>
-							<li>upgrade container (security fix)</li>
-							<li>JVM error (out of memory)</li>
-							<li>server must be rebooted (kernel update)</li>
+							<li>JVM error (e.g. out of memory)</li>
+							<li>upgrade servlet container (e.g. security fix)</li>
 						</ul>
 					</section>
 					<section>
-						<h3>Problems</h3>
-						<ul>
-							<li>server does too many things</li>
-							<li>logged users must relogin after deploy</li>
-							<li>frontends and backend developers working on same artifact</li>
-							<li>blocks adoption of continuous delivery</li>
-						</ul>
+						service interruption
 					</section>
 				</section>
 
@@ -127,8 +116,13 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<h2>Simplify deploy</h2>
 					</section>
 					<section>
-						<p>separation of concerns</p>
-						<p>webapp = backend + frontend</p>
+						minimize service interruptions	
+					</section>
+					<section>
+						separation of concerns<br>
+					</section>
+					<section>
+						webapp = backend + frontend<br>
 					</section>
 					<section>
 						<h3>Backend</h3>
@@ -137,32 +131,29 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>batch jobs</li>
+							<li>persistence</li>
 							<li><strike>HTML generation</strike></li>
-							<li><strike>serving other static resources (CSS, JS)</strike></li>
+							<li><strike>static files (JS, CSS, images, etc)</strike></li>
 						</ul>
 					</section>
 					<section>
-						<p>consumer agnostic</p>
-						<p>can be the a java webapp (spring-mvc, resteasy, jersey, etc)</p>
-						<p>can be developed using maven, gradle, lein, etc</p>
-					</section>
-					<section>
-						Backend deploy is unchanged (servlet container)
-					</section>
-					<section>
-						<h3>Frontend with container</h3>
+						<h3>Frontend</h3>
 						<ul>
 							<li>HTML templates</li>
-							<li>serving other static resources (CSS, JS)</li>
+							<li>static files (JS, CSS, images, etc)</li>
 						</ul>
 					</section>
 					<section>
-						<p>a single page application (angularjs, backbone + reactjs, etc)</p>
-						<p>maven + <a href="http://webjars.org" target="_blank">webjars</a></p>
+						a single page application (angularjs, backbone + reactjs, etc)<br>
+						maven + <a href="http://webjars.org" target="_blank">webjars</a><br>
 					</section>
 					<section>
-						frontend deploy is unchanged (servlet container)
+						two webapps in the same servlet container
+					</section>
+					<section>
+						<h3>same-origin policy</h3>
+						frontend <a href>www.example.com/frontend</a><br>
+						backend <a href>www.example.com/backend</a><br>
 					</section>
 					<section>
 						<h3>Frontend without container</h3>
@@ -173,7 +164,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						build artifact is a static-directory with some JS, CSS and HTML files<br>
 					</section>
 					<section>
-						can be deployed without service interruption<br>
+						can be deployed without process restart<br>
 						(e.g. use linux atomic <strong>rename</strong> syscall on symlinks)<br>
 					</section>
 					<section>
@@ -181,14 +172,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						can be served using <strong>sendfile</strong> syscall (direct streaming file-socket)<br>
 					</section>
 					<section>
-						<h3>same-origin policy</h3>
-						frontend <a href>www.example.com/frontend</a><br>
-						backend <a href>www.example.com/backend</a><br>
-					</section>
-					<section>
 						<h3>cross-origin policy</h3>
 						frontend <a href>www.example.com/frontend</a><br>
-						backed <a href>www.example.com:8080/backend</a><br>
+						backend <a href>www.example.com:8080/backend</a><br>
 					</section>
 					<section>
 						<h3>CORS</h3>
@@ -353,8 +339,11 @@ app.run(function($window, $state, $log) {
 					<h2>Simplify Charting</h2>
 				</section>
 				<section>
-					charts in flash<br>
-					charts as server generated images
+					charts as server generated images<br>
+					resource intensive operation<br>
+				</section>
+				<section>
+					charts in Adobe Flash(r) <br>
 				</section>
 				<section>
 					<h1>javascript</h1>
@@ -379,6 +368,9 @@ app.run(function($window, $state, $log) {
 				<section>
 					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
 					(SVG CSS JS, requires IE9+)<br>
+				</section>
+				<section>
+					<a href="http://dc-js.github.io/dc.js/" target="_blank">dc.js</a><br>
 				</section>
 				<section>
 					<a href="http://c3js.org/samples/chart_combination.html" target="_blank">C3.js</a><br>
