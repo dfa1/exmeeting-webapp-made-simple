@@ -55,21 +55,12 @@
 
 				<section>
 					<section>
-						<h2>MVC Webapp Architecture</h2>
-						<ul>
-							<li>browser invokes an action (change view, submit form)</li>
-							<li>webapp handles the request</li>
-							<li>webapp sends a new view to the browser</li>
-						</ul>
-					</section>
-					<section>
 						<h3>Webapp</h3>
 						<ul>
 							<li>authentication&amp;authorization</li>
-							<li>session affinity (via cookies)</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>persistence</li>
+							<li>data persistence</li>
 							<li>HTML generation (including dates, timezones, numbers, etc)</li>
 							<li>static files (JS, CSS, images, etc)
 						</ul>
@@ -81,20 +72,15 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<h3>Browser</h3>
 						<ul>
 							<li>render HTML page on screen</li>
-							<li>send relevant cookies for auth</li>
+							<li>invoke actions to the remote webapp</li>
 						</ul>
 					</section>
 					<section>
 						<h3>Deployment model</h3>
 						<ul>
-							<li>one .war per webapp</li>
-							<li>one or more .war per servlet container</li>
-							<li>one JVM per servlet container</li>
-							<li>* expose servlet container via reverse-proxy</li>
+							<li>.war inside servlet container</li>
+							<li>servlet containers keeps HttpSession (via cookies)</li>
 						</ul>
-						<aside class="notes">
-							reverse proxy to terminate HTTPS connections, load balancing, etc
-						</aside>
 					</section>
 					<section>
 						<h3>What happens when...</h3>
@@ -127,11 +113,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<section>
 						<h3>Backend</h3>
 						<ul>
-							<li>authentication</li>
-							<li>authorization</li>
+							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>persistence</li>
+							<li>data persistence</li>
 							<li><strike>HTML generation</strike></li>
 							<li><strike>static files (JS, CSS, images, etc)</strike></li>
 						</ul>
@@ -144,37 +129,30 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						</ul>
 					</section>
 					<section>
-						a single page application (angularjs, backbone + reactjs, etc)<br>
+						a single page application<br>
 						maven + <a href="http://webjars.org" target="_blank">webjars</a><br>
 					</section>
 					<section>
-						two webapps in the same servlet container
+						two webapps deployed inside the same servlet container
 					</section>
 					<section>
 						<h3>same-origin policy</h3>
-						frontend <a href>www.example.com/frontend</a><br>
-						backend <a href>www.example.com/backend</a><br>
+						frontend <a href>www.example.com/frontend/</a><br>
+						backend <a href>www.example.com/backend/</a><br>
 					</section>
 					<section>
 						<h3>Frontend without container</h3>
 					</section>
 					<section>
-						everage the node.js ecosystem<br>
+						leverage the node.js ecosystem<br>
 						(npm, grunt, gulp, bower, less, uglify, browserify, etc)<br>
-						build artifact is a static-directory with some JS, CSS and HTML files<br>
-					</section>
-					<section>
-						can be deployed without process restart<br>
-						(e.g. use linux atomic <strong>rename</strong> syscall on symlinks)<br>
-					</section>
-					<section>
-						can be served as gzip (for optimal bandwidth usage)<br>
-						can be served using <strong>sendfile</strong> syscall (direct streaming file-socket)<br>
+						build artifact is a static directory (JS, CSS, images and HTML templates)<br>
+						HTML templates are converted into DOM inside the browser	
 					</section>
 					<section>
 						<h3>cross-origin policy</h3>
-						frontend <a href>www.example.com/frontend</a><br>
-						backend <a href>www.example.com:8080/backend</a><br>
+						frontend <a href>https://frontend.com</a><br>
+						backend <a href>https://backend.com</a><br>
 					</section>
 					<section>
 						<h3>CORS</h3>
@@ -184,12 +162,21 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<h3>Advantages</h3>
 						minimal presentation logic in the backend<br>
 						independent deploy<br>
-						more threads available for real work (not serving static files)<br>
+					</section>
+					<section>
+						can be hot deployed (no restart needed)<br>
+						(e.g. linux atomic <strong>rename</strong> syscall on symlinks)<br>
+					</section>
+					<section>
+						can be served as gzip (for optimal bandwidth usage)<br>
+						can be served using <strong>sendfile</strong> syscall (direct streaming file-socket)<br>
+					</section>
+					<section>
+						less resources used in the backend webapp	
 					</section>
 					<section>
 						one backend, multiple frontends<br>
 						new feature demo<br>
-						test a JS/CSS fix for IE<br>
 					</section>
 			</section>
 
@@ -198,13 +185,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<h2>Simplify scaling</h2>
 				</section>
 				<section>
-					cluster = multiple backend instances<br>
-				</section>
-				<section>
 					high availability<br>
 				</section>
 				<section>
-					load balancing<br>
+					cluster = multiple backend instances<br>
 				</section>
 				<section>
 					when one backend instance goes down all users on that node must be re-login<br>
@@ -228,6 +212,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					share-nothing architecture<br>
+				</section>
+				<section>
+					load balancing<br>
 				</section>
 				<section>
 					<h2>example</h2>
@@ -310,7 +297,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 });
 					</code></pre>
 				</section>
-				<section> <!-- TODO: remove? -->
+				<section>
 					<h3>Logout from all tabs</h3>
 					<pre><code>// global login/logout via 'storage' event
 app.run(function($window, $state, $log) {
@@ -329,8 +316,14 @@ app.run(function($window, $state, $log) {
 });
 					</code></pre>
 				</section>
-			<section>
-					<p>database and reverse-proxy are still a single-point of failure</p>
+				<section>
+					<blockquote cite="">
+						<p>Simplicity is a prerequisite for reliability</p>
+						<footer>-- Edsger Dijkstra</footer>
+					</blockquote>
+				</section>
+				<section>
+					database and reverse-proxy are still a single-point of failure<br>
 				</section>
 			</section>
 
@@ -353,7 +346,7 @@ app.run(function($window, $state, $log) {
 					data processing in the frontend<br>
 					one fetch = multiple charts
 					<aside class="notes">
-  					data processing (sorting, reducing, etc) happens on the client
+  					data processing (sorting, reducing, etc) happens on the browser 
 					</aside>
 				</section>
 				<section>
@@ -377,6 +370,10 @@ app.run(function($window, $state, $log) {
 				</section>
 			</section>
 
+			<section>
+				back to the past?
+			</section>
+			
 			<section>
 				<section>
 					<h2>Simplify Caching</h2>
@@ -461,17 +458,6 @@ app.run(function($window, $state, $log) {
 				<section>
 					<p><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank">pragmatic restful api</a>
 				</section>
-			</section>
-
-			<section>
-				<blockquote cite="">
-						<p>Simplicity is a prerequisite for reliability</p>
-						<footer>-- Edsger Dijkstra</footer>
-				</blockquote>
-			</section>
-
-			<section>
-				back to the past?
 			</section>
 
 	   </div>
