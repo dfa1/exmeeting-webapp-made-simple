@@ -44,7 +44,7 @@
 					<h1>Webapp<br>made<br>simple(r)</h1>
 				</section>
 				<section>
-					<h3>No silver bullets™</h3>
+					<h3>No silver bullet&#8482;</h3>
 					<aside class="notes">
 						Context
 						Scope
@@ -54,11 +54,14 @@
 
 				<section>
 					<section>
-						<h3>Webapp</h3>
+						<h2>Start</h2>
+					</section>
+					<section>
 						<ul>
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
+							<li>batch (reporting, etc)</li>
 							<li>HTML generation (including dates, timezones, numbers, etc)</li>
 							<li>static files (JS, CSS, images, etc)
 						</ul>
@@ -90,7 +93,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>upgrade servlet container (e.g. security fix)</li>
 						</ul>
 					</section>
-					<section>
+					<section data-transition="slide" data-background="#b5533c">
 						&#9760; service interruption &#9760;
 					</section>
 				</section>
@@ -106,7 +109,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						separation of concerns<br>
 					</section>
 					<section>
-						webapp = backend + frontend<br>
+						backend vs frontend<br>
 					</section>
 					<section>
 						<h3>Backend</h3>
@@ -149,7 +152,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						<h3>Frontend without servlet container</h3>
 					</section>
 					<section>
-						leverage the node.js ecosystem<br>
+						leverage the <a href="http://nodejs.org" target="_blank">node.js</a> ecosystem<br>
 						(npm, grunt, gulp, bower, less, uglify, browserify, etc)<br>
 					</section>
 					<section>
@@ -182,11 +185,11 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<h2>Simplify scaling</h2>
 				</section>
 				<section>
-					load balancing<br>
-					e.g. on tomcat set a jvmRoute + append the jvmRoute to the session id<br>
+					high availability<br>
 				</section>
 				<section>
-					high availability<br>
+					load balancing<br>
+					e.g. on tomcat set a jvmRoute, stateless<br>
 				</section>
 				<section>
 					when one backend instance goes down all users on that node must be re-login<br>
@@ -197,7 +200,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					share-nothing architecture<br>
 				</section>
-				<section>
+				<section data-transition="slide" data-background="#4d7e65">
 					<h1>REST</h1>
 				</section>
 				<section>
@@ -205,13 +208,13 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					no Cookies<br>
 				</section>
 				<section>
-					implies that every request must <strong>carry on authentication token</strong>
+					implies that every request must <strong>carry on authentication</strong>
 				</section>
 				<section>
 					<code>Authorization:Basic YWRtaW46YWRtaW4=</code>
 				</section>
 				<section>
-					restarting a backend without interfere with clients
+					backends can be restarted without interfering with clients
 				</section>
 				<section>
 					<strong>beware</strong><br>
@@ -278,6 +281,13 @@ $httpProvider.interceptors.push(function($rootScope, AuthContext){
 					</code></pre>
 				</section>
 				<section>
+					<pre><code><!-- web.xml -->
+<session-config>
+  <session-timeout>10</session-timeout>
+</session-config>
+					</code></pre>
+				</section>
+				<section>
 					<pre><code>// postpone session expiry until a 'session.keepalive' event is produced
 app.run(function($rootScope, $timeout, AuthContext) {
   var sessionTimeout = moment.duration(10, 'minutes');
@@ -327,9 +337,9 @@ $httpProvider.interceptors.push(function($rootScope) {
 					</aside>
 				</section>
 				<section>
-					charts in Adobe Flash®<br>
+					charts in Adobe Flash&reg;<br>
 				</section>
-				<section>
+				<section data-transition="slide" data-background="#4d7e65">
 					<h1>HTML5</h1>
 				</section>
 				<section>
@@ -338,7 +348,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
-					(SVG CSS JS, requires IE9+)<br>
+					(SVG, CSS, JS, requires IE9+)<br>
 				</section>
 				<section>
 					<a href="http://dc-js.github.io/dc.js/" target="_blank">dc.js</a><br>
@@ -374,9 +384,6 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					then add cache headers only when proven useful
-				</section>
-				<section>
-					cache invalidation is hard
 				</section>
 				<section>
 					<h1>ETAG</h1>
@@ -452,7 +459,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 			</section>
 
 			<section>
-				END<br>
+				<h2>END</h2>
 			</section>
 	   </div>
 
