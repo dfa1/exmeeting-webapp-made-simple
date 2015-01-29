@@ -184,6 +184,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<h2>Simplify scaling</h2>
 				</section>
 				<section>
+					load balancing<br>
+					e.g. on tomcat set a jvmRoute + append the jvmRoute to the session id<br>
+				</section>
+				<section>
 					high availability<br>
 				</section>
 				<section>
@@ -194,7 +198,6 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					replicate the session<br>
-					e.g. on tomcat set a jvmRoute + append the jvmRoute to the session id<br>
 				</section>
 				<section>
 					share-nothing architecture<br>
@@ -211,9 +214,6 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					restarting a backend without interfere with clients
-				</section>
-				<section>
-					load balancing<br>
 				</section>
 				<section>
 					<h3>Moving the session in the browser</h3>
@@ -364,67 +364,6 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 			</section>
 
-			<section>
-				<section>
-					<h2>Simplify timestamps</h2>
-				</section>
-				<section>
-					<code>new java.util.Date(1422300695732L);</code><br>
-					<code>"Mon Jan 26 20:31:35 CET 2015"</code><br>
-				</section>
-				<section>
-					web service provides dates as UNIX timestamps<br>
-					<code>{ "last_update": 1422300695732 }</code>
-				</section>
-				<section>
-					<code>new Date(1422300695732);</code><br>
-					<code>"Mon Jan 26 2015 20:31:35 GMT+0100"</code><br>
-				</section>
-				<section>
-					automatically uses the timezone of the user
-				</section>
-				<section>
-					<a href="http://momentjs.com" target="_blank">moment.js</a>
-				</section>
-				<section>
-					jodatime:java = momentjs:javascript
-				</section>
-				<section>
-					alternatively many web services uses ISO-8601<br>
-					<code>2015-01-26T16:14:49+00:00</code>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h2>Simplify pagination</h2>
-				</section>
-				<section>
-					<p>first page</p>
-					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="next"</code>
-				</section>
-				<section>
-					<p>second page</p>
-					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
-					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="prev"</code><br>
-					<code>Link: &lt;logs?level=ERROR&page=3&perPage=10>; rel="next"</code>
-				</section>
-				<section>
-					<p>third page</p>
-					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
-					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="prev"</code><br>
-					<code>Link: &lt;logs?level=ERROR&page=4&perPage=10>; rel="next"</code>
-				</section>
-				<section>
-					Link header introduced by RFC 5988
-				</section>
-				<section>
-					<a href="https://developer.github.com/v3/#pagination" target="_blank">github pagination</a>
-				</section>
-				<section>
-					<p><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank">pragmatic restful api</a>
-				</section>
-			</section>
 
 			<section>
 				<section>
@@ -464,6 +403,70 @@ $httpProvider.interceptors.push(function($rootScope) {
 					see also <code>@Version</code> annotation of JPA/Hibernate
 				</section>
 			</section>
+
+			<section>
+				<section>
+					<h2>Simplify pagination</h2>
+				</section>
+				<section>
+					<p>first page</p>
+					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					<p>second page</p>
+					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="prev"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=3&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					<p>third page</p>
+					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="prev"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=4&perPage=10>; rel="next"</code>
+				</section>
+				<section>
+					Link header introduced by RFC 5988
+				</section>
+				<section>
+					<a href="https://developer.github.com/v3/#pagination" target="_blank">github pagination</a>
+				</section>
+				<section>
+					<p><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api" target="_blank">pragmatic restful api</a>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Simplify timestamps</h2>
+				</section>
+				<section>
+					<code>new java.util.Date(1422300695732L);</code><br>
+					<code>"Mon Jan 26 20:31:35 CET 2015"</code><br>
+				</section>
+				<section>
+					web service provides dates as UNIX timestamps<br>
+					<code>{ "last_update": 1422300695732 }</code>
+				</section>
+				<section>
+					<code>new Date(1422300695732);</code><br>
+					<code>"Mon Jan 26 2015 20:31:35 GMT+0100"</code><br>
+				</section>
+				<section>
+					automatically uses the timezone of the user
+				</section>
+				<section>
+					<a href="http://momentjs.com" target="_blank">moment.js</a>
+				</section>
+				<section>
+					jodatime:java = momentjs:javascript
+				</section>
+				<section>
+					alternatively many web services uses ISO-8601<br>
+					<code>2015-01-26T16:14:49+00:00</code>
+				</section>
+			</section>
+
+
 
 			<section>
 				back to the past?
