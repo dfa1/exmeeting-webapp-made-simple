@@ -44,9 +44,12 @@
 					<h1>Webapp<br>made<br>simple(r)</h1>
 				</section>
 				<section>
-					<h2>No silver bullets™</h2>
+					<h3>No silver bullets™</h3>
 					<aside class="notes">
-						Context Scope Budget Team
+						Context
+						Scope
+						Budget
+						Team
 				</section>
 
 				<section>
@@ -111,7 +114,6 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>data persistence</li>
 							<li><strike>HTML generation</strike></li>
 							<li><strike>static files (JS, CSS, images, etc)</strike></li>
 						</ul>
@@ -160,11 +162,11 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</section>
 					<section>
 						can be hot deployed (no restart needed)<br>
-						(e.g. linux atomic <strong>rename</strong> syscall on symlinks)<br>
-					</section>
-					<section>
 						can be served as gzip (for optimal bandwidth usage)<br>
 						can be served using <strong>sendfile</strong> syscall (direct streaming file-socket)<br>
+					</section>
+					<section>
+						<a href="https://gist.github.com/datagrok/3807742#file-symlink-replacement-md" target="_blank">Race-condition-free deployment</a>
 					</section>
 					<section>
 						less resources used in the backend webapp
@@ -398,19 +400,19 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					<p>first page</p>
-					<code>Link: &lt;logs?page=2&perPage=10>; rel="next"</code>
+					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="next"</code>
 				</section>
 				<section>
 					<p>second page</p>
-					<code>Link: &lt;logs?page=1&perPage=10>; rel="first"</code><br>
-					<code>Link: &lt;logs?page=1&perPage=10>; rel="prev"</code><br>
-					<code>Link: &lt;logs?page=3&perPage=10>; rel="next"</code>
+					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="prev"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=3&perPage=10>; rel="next"</code>
 				</section>
 				<section>
 					<p>third page</p>
-					<code>Link: &lt;logs?page=1&perPage=10>; rel="first"</code><br>
-					<code>Link: &lt;logs?page=2&perPage=10>; rel="prev"</code>
-					<code>Link: &lt;logs?page=4&perPage=10>; rel="next"</code>
+					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="prev"</code><br>
+					<code>Link: &lt;logs?level=ERROR&page=4&perPage=10>; rel="next"</code>
 				</section>
 				<section>
 					Link header introduced by RFC 5988
