@@ -138,29 +138,32 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						backend <a href>www.example.com/backend/</a><br>
 					</section>
 					<section>
-						<h3>Frontend without container</h3>
+						<h3>Advantages</h3>
+						minimal presentation logic in the backend<br>
+						independent deploy<br>
+					</section>
+					<section>
+						one backend, multiple frontends<br>
+						new feature demo<br>
+					</section>
+					<section>
+						<h3>Frontend without servlet container</h3>
 					</section>
 					<section>
 						leverage the node.js ecosystem<br>
 						(npm, grunt, gulp, bower, less, uglify, browserify, etc)<br>
 					</section>
 					<section>
-						build artifact is a static directory (JS, CSS, images and HTML templates)<br>
+						build artifact are (JS, CSS, images and HTML templates)<br>
 						HTML templates are converted into DOM inside the browser
 					</section>
 					<section>
-						<h3>cross-origin policy</h3>
 						frontend <a href>https://frontend.com</a><br>
 						backend <a href>https://backend.com</a><br>
 					</section>
 					<section>
-						<h3>CORS</h3>
+						<h3>Cross Origin Resource Sharing</h3>
 						<a href="http://enable-cors.org" target="_blank">enable-cors.org</a>
-					</section>
-					<section>
-						<h3>Advantages</h3>
-						minimal presentation logic in the backend<br>
-						independent deploy<br>
 					</section>
 					<section>
 						can be hot deployed (no restart needed)<br>
@@ -168,14 +171,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						can be served using <strong>sendfile</strong> syscall (direct streaming file-socket)<br>
 					</section>
 					<section>
+						less resources used to serve static resources
+					</section>
+					<section>
 						<a href="https://gist.github.com/datagrok/3807742#file-symlink-replacement-md" target="_blank">Race-condition-free deployment</a>
-					</section>
-					<section>
-						less resources used in the backend webapp
-					</section>
-					<section>
-						one backend, multiple frontends<br>
-						new feature demo<br>
 					</section>
 			</section>
 
@@ -210,6 +209,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					implies that every request must <strong>carry on authentication token</strong>
 				</section>
 				<section>
+					<code>Authorization:Basic YWRtaW46YWRtaW4=</code>
+				</section>
+				<section>
 					restarting a backend without interfere with clients
 				</section>
 				<section>
@@ -218,21 +220,14 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					backend: a restful web service<br>
 					resteasy<br>
-					deployed on JBoss<br>
+					maven + JBoss<br>
 					HTTPS<br>
 					basic auth<br>
 					JSON + CSV mediatypes<br>
 				</section>
 				<section>
-					<code>Authorization:Basic YWRtaW46YWRtaW4=</code>
-				</section>
-				<section>
 					frontend: an angular app<br>
-					deployed on JBoss<br>
-				</section>
-				<section>
-					http interceptors<br>
-					(servlet filters, spring mvc interceptor, etc)
+					maven + webjars + JBoss<br>
 				</section>
 				<section>
 					<pre><code>// hiding how we store the auth data
@@ -259,6 +254,10 @@ AuthContext.put({ token: basicAuthToken });
 // logout
 AuthContext.reset();
 </code></pre>
+				</section>
+				<section>
+					http interceptors<br>
+					(similar to servlet filters, spring mvc interceptor, etc)
 				</section>
 				<section>
 					<pre><code>// put 'Authorization' header on each outgoing request
@@ -324,10 +323,10 @@ $httpProvider.interceptors.push(function($rootScope) {
 					charts in Adobe Flash®<br>
 				</section>
 				<section>
-					<h1>javascript</h1>
+					<h1>HTML5</h1>
 				</section>
 				<section>
-					fetch data from backend as JSON<br>
+					fetch data from backend<br>
 					data processing in the frontend<br>
 					one fetch = multiple charts
 					<aside class="notes">
@@ -340,7 +339,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					<a href="http://www.chartjs.org" target="_blank">Chart.js</a><br>
-					(HTML5 canvas, requires IE9+)<br>
+					(canvas, requires IE9+)<br>
 				</section>
 				<section>
 					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
@@ -353,7 +352,6 @@ $httpProvider.interceptors.push(function($rootScope) {
 					<a href="http://c3js.org/samples/chart_combination.html" target="_blank">C3.js</a><br>
 				</section>
 			</section>
-
 
 			<section>
 				<section>
@@ -372,8 +370,6 @@ $httpProvider.interceptors.push(function($rootScope) {
 					Be explicit about caching <br>(IE9 caches everything, even AJAX responses)
 				</section>
 				<section>
- 					defaults to no caching <br>
-				(using servlet filter or spring mvc interceptor)<br>
 					<code>Cache-Control: no-cache</code> <br>
 					<code>Pragma: no-cache</code><br>
 				</section>
@@ -404,13 +400,11 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					<p>second page</p>
-					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
 					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="prev"</code><br>
 					<code>Link: &lt;logs?level=ERROR&page=3&perPage=10>; rel="next"</code>
 				</section>
 				<section>
 					<p>third page</p>
-					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="first"</code><br>
 					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="prev"</code><br>
 					<code>Link: &lt;logs?level=ERROR&page=4&perPage=10>; rel="next"</code>
 				</section>
@@ -445,21 +439,22 @@ $httpProvider.interceptors.push(function($rootScope) {
 					automatically uses the timezone of the user
 				</section>
 				<section>
+					alternatively many web services uses ISO-8601<br>
+					<code>2015-01-26T16:14:49+00:00</code>
+				</section>
+				<section>
 					<a href="http://momentjs.com" target="_blank">moment.js</a>
 				</section>
 				<section>
 					jodatime:java = momentjs:javascript
 				</section>
-				<section>
-					alternatively many web services uses ISO-8601<br>
-					<code>2015-01-26T16:14:49+00:00</code>
-				</section>
 			</section>
-
-
 
 			<section>
 				back to the past?
+			</section>
+			<section>
+				END<br>
 			</section>
 	   </div>
 
@@ -488,10 +483,10 @@ $httpProvider.interceptors.push(function($rootScope) {
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				//	{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				//	{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+				//	{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
