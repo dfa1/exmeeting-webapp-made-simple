@@ -280,20 +280,15 @@ $httpProvider.interceptors.push(function($rootScope, AuthContext){
 				</section>
 				<section>
 					<pre><code>// postpone session expiry until a 'session.keepalive' event is produced
-app.run(function($rootScope, $state, $log, $timeout, AuthContext) {
-  var timeout = moment.duration(10, 'minutes');
-  $log.info("session timeout is " + timeout.asMinutes() + " minute(s)");
-  function relogin() {
-    $log.warn("closing session by inactivity");
+app.run(function($rootScope, $timeout, AuthContext) {
+  var sessionTimeout = moment.duration(10, 'minutes');
+  function logout() {
     AuthContext.reset();
-    $state.go('relogin', {
-      reason : 'Your session has timed out, please login again'
-    });
   }
-  var promise = $timeout(relogin, timeout.asMilliseconds());
+  var promise = $timeout(logout, sessionTimeout.asMilliseconds());
   $rootScope.$on("session.keepalive", function() {
     $timeout.cancel(promise);
-    promise = $timeout(relogin, timeout.asMilliseconds());
+    promise = $timeout(logout, sessionTimeout.asMilliseconds());
   });
 });
 					</code></pre>
