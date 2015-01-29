@@ -282,9 +282,7 @@ $httpProvider.interceptors.push(function($rootScope, AuthContext){
 					<pre><code>// postpone session expiry until a 'session.keepalive' event is produced
 app.run(function($rootScope, $timeout, AuthContext) {
   var sessionTimeout = moment.duration(10, 'minutes');
-  function logout() {
-    AuthContext.reset();
-  }
+  var logout = AuthContext.reset.bind(AuthContext)t ;
   var promise = $timeout(logout, sessionTimeout.asMilliseconds());
   $rootScope.$on("session.keepalive", function() {
     $timeout.cancel(promise);
