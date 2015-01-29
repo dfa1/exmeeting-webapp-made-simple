@@ -138,7 +138,6 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						backend <a href>www.example.com/backend/</a><br>
 					</section>
 					<section>
-						<h3>Advantages</h3>
 						minimal presentation logic in the backend<br>
 						independent deploy<br>
 					</section>
@@ -213,6 +212,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					restarting a backend without interfere with clients
+				</section>
+				<section>
+					<strong>beware</strong><br>
+					database and reverse-proxy are still a single-point of failure<br>
 				</section>
 				<section>
 					<h3>Moving the session in the browser</h3>
@@ -300,10 +303,6 @@ $httpProvider.interceptors.push(function($rootScope) {
 					</code></pre>
 				</section>
 				<section>
-					<strong>beware</strong><br>
-					database and reverse-proxy are still a single-point of failure<br>
-				</section>
-				<section>
 					<blockquote cite="">
 						<p>Simplicity is a prerequisite for reliability</p>
 						<footer>-- Edsger Dijkstra</footer>
@@ -320,12 +319,6 @@ $httpProvider.interceptors.push(function($rootScope) {
 					resource intensive operation<br>
 				</section>
 				<section>
-					charts in Adobe Flash®<br>
-				</section>
-				<section>
-					<h1>HTML5</h1>
-				</section>
-				<section>
 					fetch data from backend<br>
 					data processing in the frontend<br>
 					one fetch = multiple charts
@@ -334,8 +327,10 @@ $httpProvider.interceptors.push(function($rootScope) {
 					</aside>
 				</section>
 				<section>
-					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/basic_usage" target="_blank">web workers</a> for intensive data applications<br>
-					runs in a separate, background thread<br>
+					charts in Adobe Flash®<br>
+				</section>
+				<section>
+					<h1>HTML5</h1>
 				</section>
 				<section>
 					<a href="http://www.chartjs.org" target="_blank">Chart.js</a><br>
@@ -350,6 +345,10 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					<a href="http://c3js.org/samples/chart_combination.html" target="_blank">C3.js</a><br>
+				</section>
+				<section>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/basic_usage" target="_blank">web workers</a> for intensive data applications<br>
+					runs in a separate, background thread<br>
 				</section>
 			</section>
 
@@ -383,9 +382,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 					<h1>ETAG</h1>
 				</section>
 				<section>
-					ETAG could be used for <a href="http://martinfowler.com/eaaCatalog/optimisticOfflineLock.html" target="_blank">optimistic locking</a>
-				</section>
-				<section>
+					ETAG could be used for <a href="http://martinfowler.com/eaaCatalog/optimisticOfflineLock.html" target="_blank">optimistic locking</a><br>
 					see also <code>@Version</code> annotation of JPA/Hibernate
 				</section>
 			</section>
@@ -395,16 +392,16 @@ $httpProvider.interceptors.push(function($rootScope) {
 					<h2>Simplify pagination</h2>
 				</section>
 				<section>
-					<p>first page</p>
+					<code>GET http://backend.com/logs?level=ERROR</code>
+				</section>
+				<section>
 					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="next"</code>
 				</section>
 				<section>
-					<p>second page</p>
 					<code>Link: &lt;logs?level=ERROR&page=1&perPage=10>; rel="prev"</code><br>
 					<code>Link: &lt;logs?level=ERROR&page=3&perPage=10>; rel="next"</code>
 				</section>
 				<section>
-					<p>third page</p>
 					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="prev"</code><br>
 					<code>Link: &lt;logs?level=ERROR&page=4&perPage=10>; rel="next"</code>
 				</section>
@@ -453,6 +450,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 			<section>
 				back to the past?
 			</section>
+
 			<section>
 				END<br>
 			</section>
