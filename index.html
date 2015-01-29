@@ -189,10 +189,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					load balancing<br>
-					e.g. on tomcat set a jvmRoute, stateless<br>
+					e.g. on tomcat set a jvmRoute, sticky session on reverse-proxy<br>
 				</section>
 				<section>
-					when one backend instance goes down all users on that node must be re-login<br>
+					 backend restart = session lost
 				</section>
 				<section>
 					replicate the session<br>
@@ -214,11 +214,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<code>Authorization:Basic YWRtaW46YWRtaW4=</code>
 				</section>
 				<section>
-					backends can be restarted without interfering with clients
-				</section>
-				<section>
-					<strong>beware</strong><br>
-					database and reverse-proxy are still a single-point of failure<br>
+					backends can be restarted freely
 				</section>
 				<section>
 					<h3>Moving the session in the browser</h3>
