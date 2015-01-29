@@ -44,11 +44,9 @@
 					<h1>Webapp<br>made<br>simple(r)</h1>
 				</section>
 				<section>
-					<h2>Disclaimer</h2>
-					No silver bullets™<br>
+					<h2>No silver bullets™</h2>
 					<aside class="notes">
-						Context is king
-					</aside>
+						Context Scope Budget Team
 				</section>
 
 				<section>
@@ -58,7 +56,6 @@
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>data persistence</li>
 							<li>HTML generation (including dates, timezones, numbers, etc)</li>
 							<li>static files (JS, CSS, images, etc)
 						</ul>
@@ -91,7 +88,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						</ul>
 					</section>
 					<section>
-						service interruption
+						&#9760; service interruption &#9760;
 					</section>
 				</section>
 
@@ -218,7 +215,6 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					<h3>Moving the session in the browser</h3>
 				</section>
 				<section>
-					<h2>
 					backend: a restful web service<br>
 					resteasy<br>
 					deployed on JBoss<br>
@@ -232,6 +228,10 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					frontend: an angular app<br>
 					deployed on JBoss<br>
+				</section>
+				<section>
+					http interceptors<br>
+					(servlet filters, spring mvc interceptor, etc)
 				</section>
 				<section>
 					<pre><code>// hiding how we store the auth data
@@ -250,8 +250,14 @@ app.service('AuthContext', function($localStorage) {
 					</code></pre>
 				</section>
 				<section>
-					login is <code><pre>AuthContext.put({ token: basicAuthToken });</pre></code>
-					logout is <code><pre>AuthContext.reset();</pre></code>
+					<pre><code>// in-memory login/logout
+
+// login
+AuthContext.put({ token: basicAuthToken });
+
+// logout
+AuthContext.reset();
+</code></pre>
 				</section>
 				<section>
 					<pre><code>// put 'Authorization' header on each outgoing request
