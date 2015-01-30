@@ -61,7 +61,7 @@
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>batch (reporting, etc)</li>
+							<li>background jobs (reporting, mailing lists, etc)</li>
 							<li>HTML generation (including dates, timezones, numbers, etc)</li>
 							<li>static files (JS, CSS, images, etc)
 						</ul>
@@ -78,10 +78,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</section>
 					<section>
 						<h3>Deployment model</h3>
-						<ul>
-							<li>.war inside servlet container</li>
-							<li>servlet containers keeps HttpSession (via cookies)</li>
-						</ul>
+						web archive (.war) inside servlet container
 					</section>
 					<section>
 						<h3>What happens when...</h3>
@@ -117,6 +114,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
+							<li>background jobs (reporting, mailing lists, etc)</li>
 							<li><strike>HTML generation</strike></li>
 							<li><strike>static files (JS, CSS, images, etc)</strike></li>
 						</ul>
@@ -157,7 +155,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</section>
 					<section>
 						build artifact are (JS, CSS, images and HTML templates)<br>
-						HTML templates are converted into DOM inside the browser
+						merge HTML templates with data in the browser
 					</section>
 					<section>
 						frontend <a href>https://frontend.com</a><br>
@@ -189,7 +187,8 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				</section>
 				<section>
 					load balancing<br>
-					e.g. on tomcat set a jvmRoute, sticky session on reverse-proxy<br>
+					sticky sessions on reverse-proxy<br>
+					e.g. jvmRoute on tomcat
 				</section>
 				<section>
 					 backend restart = session lost
@@ -200,11 +199,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					share-nothing architecture<br>
 				</section>
-				<section data-transition="slide" data-background="#4d7e65">
-					<h1>REST</h1>
-				</section>
 				<section>
-					no HttpSession<br>
+					<h1>REST</h1>
+					no Sessions<br>
 					no Cookies<br>
 				</section>
 				<section>
@@ -213,7 +210,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					<code>Authorization:Basic YWRtaW46YWRtaW4=</code>
 				</section>
-				<section>
+				<section data-transition="slide" data-background="#4d7e65">
 					backends can be restarted freely
 				</section>
 				<section>
@@ -222,14 +219,14 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 				<section>
 					backend: a restful web service<br>
 					resteasy<br>
-					maven + JBoss<br>
+					maven + JBoss AS<br>
 					HTTPS<br>
 					basic auth<br>
 					JSON + CSV mediatypes<br>
 				</section>
 				<section>
-					frontend: an angular app<br>
-					maven + webjars + JBoss<br>
+					frontend: angularJS<br>
+					maven + webjars + JBoss AS<br>
 				</section>
 				<section>
 					<pre><code>// hiding how we store the auth data
