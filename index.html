@@ -61,9 +61,9 @@
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>background jobs (reporting, mailing lists, etc)</li>
-							<li>HTML generation (including dates, timezones, numbers, etc)</li>
-							<li>static files (JS, CSS, images, etc)
+							<li>background jobs (reporting, notifications, etc)</li>
+							<li>HTML generation (formatting dates, numbers, etc)</li>
+							<li>static resources (JS, CSS, images, etc)
 						</ul>
 					<aside class="notes">
 HTML generation using JSP, velocity, freemarker, JSF, whatever..
@@ -114,9 +114,9 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 							<li>authentication&amp;authorization</li>
 							<li>validation</li>
 							<li>business logic</li>
-							<li>background jobs (reporting, mailing lists, etc)</li>
+							<li>background jobs (reporting, notifications, etc)</li>
 							<li><strike>HTML generation</strike></li>
-							<li><strike>static files (JS, CSS, images, etc)</strike></li>
+							<li><strike>static resources (JS, CSS, images, etc)</strike></li>
 						</ul>
 					</section>
 					<section>
@@ -144,7 +144,6 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					</section>
 					<section>
 						one backend, multiple frontends<br>
-						new feature demo<br>
 					</section>
 					<section>
 						<h3>Frontend without servlet container</h3>
@@ -154,7 +153,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 						(npm, grunt, gulp, bower, less, uglify, browserify, etc)<br>
 					</section>
 					<section>
-						build artifact are (JS, CSS, images and HTML templates)<br>
+						build artifact are JS, CSS, images and HTML templates<br>
 						merge HTML templates with data in the browser
 					</section>
 					<section>
@@ -377,7 +376,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 					<h2>Simplify pagination</h2>
 				</section>
 				<section>
-					<code>GET http://backend.com/logs?level=ERROR</code>
+					<code>GET /logs?level=ERROR</code>
 				</section>
 				<section>
 					<code>Link: &lt;logs?level=ERROR&page=2&perPage=10>; rel="next"</code>
