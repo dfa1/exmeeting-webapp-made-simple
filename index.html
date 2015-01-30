@@ -196,7 +196,7 @@ HTML generation using JSP, velocity, freemarker, JSF, whatever..
 					implies that every request must <strong>carry on authentication</strong>
 				</section>
 				<section>
-					<code>Authorization:Basic YWRtaW46YWRtaW4=</code>
+					<code>Authorization: Basic YWRtaW46YWRtaW4=</code>
 				</section>
 				<section data-transition="slide" data-background="#4d7e65">
 					backends can be restarted freely
@@ -272,7 +272,9 @@ $httpProvider.interceptors.push(function($rootScope, AuthContext){
 					<pre><code>// postpone session expiry until a 'session.keepalive' event is produced
 app.run(function($rootScope, $timeout, AuthContext) {
   var sessionTimeout = moment.duration(10, 'minutes');
-  var logout = AuthContext.reset.bind(AuthContext)t ;
+  var logout = function() {
+    AuthContext.reset();
+  };
   var promise = $timeout(logout, sessionTimeout.asMilliseconds());
   $rootScope.$on("session.keepalive", function() {
     $timeout.cancel(promise);
@@ -319,7 +321,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 				</section>
 				<section>
 					<a href="http://www.chartjs.org" target="_blank">Chart.js</a><br>
-					(canvas, requires IE9+)<br>
+					(canvas, JS, requires IE9+)<br>
 				</section>
 				<section>
 					<a href="http://d3js.org/" target="_blank">d3.js</a><br>
@@ -342,7 +344,7 @@ $httpProvider.interceptors.push(function($rootScope) {
 					<h2>Simplify Caching</h2>
 				</section>
 				<section>
-					Be explicit about caching <br>(IE9 caches everything, even AJAX responses)
+					Be explicit about caching <br>(IE caches everything, even AJAX responses)
 				</section>
 				<section>
 					<code>Cache-Control: no-cache</code> <br>
